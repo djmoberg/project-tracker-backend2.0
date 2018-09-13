@@ -27,6 +27,6 @@
     "session-file-store": "^1.2.0"
   },
   "engines": {
-    "node": ">=0.8"
+    "node": ">=8.11.4"
   }
 }
