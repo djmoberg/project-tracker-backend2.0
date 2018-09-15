@@ -9,10 +9,10 @@ var { isAuthenticated } = require('../utils')
 
 router.post('/register', async (req, res, next) => {
     email.send({
-        from: '"Facelex" <noreply@facelex.com>', // sender address
+        from: '"Project Tracker" <noreply@facelex.com>', // sender address
         to: req.body.email, // list of receivers
-        subject: 'Velkommen', // Subject line
-        text: 'Velkommen til Facelex!', // plain text body
+        subject: 'Welcome', // Subject line
+        text: 'Welcome to Project Tracker!', // plain text body
     })
 
     bcrypt.hash(req.body.password, 10, async (err, hash) => {
@@ -44,10 +44,10 @@ router.post('/sendNewPassword', async (req, res, next) => {
         let newPass = buffer.toString('hex')
 
         email.send({
-            from: '"Facelex" <noreply@facelex.com>', // sender address
+            from: '"Project Tracker" <noreply@facelex.com>', // sender address
             to: req.body.email, // list of receivers
-            subject: 'Nytt passord', // Subject line
-            text: 'Ditt nye passord er: ' + newPass, // plain text body
+            subject: 'New password for Project Tracker', // Subject line
+            text: 'Your new password is: ' + newPass, // plain text body
         })
 
         bcrypt.hash(newPass, 10, async (err, hash) => {
