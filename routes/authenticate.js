@@ -4,7 +4,7 @@ var router = express.Router();
 var auth = require('../auth')
 
 router.post('/login', auth.authenticate('login'), (req, res, next) => {
-    res.send("Logged in")
+    res.json({ "loggedIn": true, "user": { "username": req.user.username, "isAdmin": req.user.isAdmin } })
 })
 
 router.get('/logout', (req, res) => {

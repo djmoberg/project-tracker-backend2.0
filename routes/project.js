@@ -135,6 +135,7 @@ router.get('/:id', isAuthenticated, async (req, res, next) => {
         res.json({ name: project.name, description: project.description, overview: rows3 })
     } else {
         console.log("unauthorized")
+        res.sendStatus(403)
     }
 })
 

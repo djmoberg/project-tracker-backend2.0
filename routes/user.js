@@ -59,6 +59,11 @@ router.post('/sendNewPassword', async (req, res, next) => {
     })
 })
 
+router.put('/recoverPassword', (req, res, next) => {
+    console.log(req.body.code, req.body.password)
+    res.sendStatus(200)
+})
+
 router.get('/pendingJoinRequests', isAuthenticated, async (req, res, next) => {
     let data = [req.user._id]
     let rows = await request_projectSelectProjects(data)
