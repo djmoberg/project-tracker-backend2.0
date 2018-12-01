@@ -1,7 +1,7 @@
 var createError = require('http-errors');
 var express = require('express');
 var session = require('express-session');
-var FileStore = require('session-file-store')(session);
+var SequelizeStore = require('connect-session-sequelize')(session.Store);
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -27,13 +27,21 @@ app.use(cors({
   credentials: true
 }))
 
+var sessionStore = new SequelizeStore({
+  db: require('./db/sessionStore'),
+  expiration: 604800000, //1 week
+})
+
 app.use(session({
-  store: new FileStore({ ttl: 604800 }), //1 week
+  store: sessionStore,
+  // store: new FileStore({ ttl: 604800 }), //1 week
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false }
 }))
+
+sessionStore.sync()
 
 app.use(auth.initialize());
 app.use(auth.session());
